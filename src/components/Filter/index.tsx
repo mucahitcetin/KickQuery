@@ -3,14 +3,41 @@ import Gender from "./Gender";
 import Price from "./Price";
 import Size from "./Size";
 
-const Filter = () => {
+type Props = {
+  close: () => void;
+  isOpen: boolean;
+};
+const Filter = ({ isOpen, close }: Props) => {
   return (
-    <div className="max-lg:max-w-lg max-lg:mx-auto max-lg:h-[80vh] ">
-      <h2 className="text-xl font-semibold max-lg:bg-white max-lg:flex max-lg:justify-between max-lg:p-4 rounded-t-md"></h2>
-      <Size />
-      <Color />
-      <Gender />
-      <Price />
+    <div
+      className={`${
+        isOpen
+          ? "max-lg:fixed max-lg:inset-0 max-lg:grid max-lg:place-items-center max-lg:bg-zinc-900 max-lg:bg-opacity-60 z-10"
+          : "max-lg:hidden"
+      }  col-span-1 `}
+    >
+      <div className="max-lg:max-w-lg max-lg:mx-auto max-lg:h-[80vh] ">
+        <h2 className="text-xl font-semibold max-lg:bg-white max-lg:flex max-lg:justify-between max-lg:p-4 rounded-t-md">
+          Filteler
+          <button className="lg:hidden" onClick={close}>
+            X
+          </button>
+        </h2>
+
+        <form className="max-lg:p-5  bg-gray h-full flex flex-col gap-[24px] rounded-b-md">
+          <Size />
+          <Color />
+          <Gender />
+          <Price />
+
+          <button
+            className="border p-2 rounded-lg hover:bg-dark hover:text-white transition"
+            type="reset"
+          >
+            Sıfırla
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

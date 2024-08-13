@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
+export type SelectedProps = {
+  selected: string[];
+  setSelected: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
 const Size = () => {
+  const [params, setParams] = useSearchParams();
   const [selected, setSelected] = useState<number[]>([]);
-  const numbers = [38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
+
+  const numbers = ["38", "39", "40", "41", "42", "43", "44", "45", "46", "47"];
 
   // numara state'de varsa çıkartır yoksa ekler
   const toggle = (num: number) => {
@@ -14,6 +22,16 @@ const Size = () => {
       setSelected([...selected, num]);
     }
   };
+
+  useEffect(() => {
+    if (selected.length > 0) {
+      params.set("size", selected.join(""));
+      setParams(params);
+    } else {
+      params.delete("size");
+      setParams(params);
+    }
+  }, [selected]);
   return (
     <div className="lg:mt-[20px]">
       <h2 className="font-semibold mb-[16px]">Numara</h2>

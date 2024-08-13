@@ -1,18 +1,10 @@
-import { useState } from "react";
-const Color = () => {
-  const [selected, setSelected] = useState<string[]>([]);
-  const colors = [
-    { code: "#4A69E2", id: "blue" },
-    { code: "#FFA52F", id: "yellow" },
-    { code: "#232321", id: "black" },
-    { code: "#234D41", id: "green" },
-    { code: "#353336", id: "dark-gray" },
-    { code: "#F08155", id: "orange" },
-    { code: "#C9CCC6", id: "light-gray" },
-    { code: "#677282", id: "gray" },
-    { code: "#925513", id: "brown" },
-    { code: "#BB8056", id: "light-brown" },
-  ];
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { SelectedProps } from "./Size";
+import { colors } from "../../utils/constants";
+
+const Color = ({ selected, setSelected }: SelectedProps) => {
+  const [params, setParams] = useSearchParams();
 
   // renk state'de varsa çıkartır yoksa ekler
   const toggle = (num: string) => {
@@ -24,6 +16,18 @@ const Color = () => {
       setSelected([...selected, num]);
     }
   };
+
+  useEffect(() => {
+    if (selected.length > 0) {
+      // seçili renk varsa aralarına , koyup urle ekle
+      params.set("color", selected.join(","));
+      setParams(params);
+    } else {
+      // seçili renk yoksa urlde parametreyi kaldır
+      params.delete("color");
+      setParams(params);
+    }
+  }, [selected]);
 
   return (
     <div>
