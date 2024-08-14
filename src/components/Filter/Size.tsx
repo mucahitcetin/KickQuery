@@ -6,14 +6,13 @@ export type SelectedProps = {
   setSelected: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-const Size = () => {
+const Size = ({ selected, setSelected }: SelectedProps) => {
   const [params, setParams] = useSearchParams();
-  const [selected, setSelected] = useState<number[]>([]);
 
   const numbers = ["38", "39", "40", "41", "42", "43", "44", "45", "46", "47"];
 
   // numara state'de varsa çıkartır yoksa ekler
-  const toggle = (num: number) => {
+  const toggle = (num: string) => {
     const found = selected.find((i) => i === num);
 
     if (found) {
@@ -25,13 +24,16 @@ const Size = () => {
 
   useEffect(() => {
     if (selected.length > 0) {
-      params.set("size", selected.join(""));
+      // seçili numaralar varsa aralarına , koyup urle ekle
+      params.set("size", selected.join(","));
       setParams(params);
     } else {
+      // seçili numara yoksa urlde parametreyi kaldır
       params.delete("size");
       setParams(params);
     }
   }, [selected]);
+
   return (
     <div className="lg:mt-[20px]">
       <h2 className="font-semibold mb-[16px]">Numara</h2>

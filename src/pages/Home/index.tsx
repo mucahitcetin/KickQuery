@@ -16,7 +16,7 @@ const Home = () => {
         Sana Uygun Seçenekler
       </h1>
 
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4 gap-5">
         <Filter isOpen={isFiltersOpen} close={() => setIsFiltersOpen(false)} />
         <List />
       </div>

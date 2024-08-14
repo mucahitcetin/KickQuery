@@ -4,12 +4,23 @@ import { Shoe } from "../../types";
 import Loader from "../../components/Loader";
 import Error from "../../components/Error";
 import Card from "../../components/Card";
+import { useSearchParams } from "react-router-dom";
+import formatParams from "../../utils/formatParams";
 
 const List = () => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["shoes"],
-    queryFn: () => api.get("/shoes").then((res) => res.data),
+  const [params, setParams] = useSearchParams();
+  const paramsObj = Object.fromEntries(params.entries());
+
+  const paramStr = formatParams(paramsObj) || null;
+
+  const { isLoading, error, data } = useQuery<Shoe[]>({
+    queryKey: ["shoes", paramStr],
+    queryFn: () =>
+      api
+        .get(paramStr ? "/shoes?" + paramStr : "/shoes")
+        .then((res) => res.data),
   });
+
   return (
     <div className="col-span-4 lg:col-span-3 ">
       {isLoading ? (
