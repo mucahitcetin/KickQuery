@@ -12,10 +12,10 @@ const Card = ({ item }: Props) => {
   return (
     <div className="flex flex-col justify-between">
       <div>
-        <div className="bg-white rounded-[16px] lg:rounded-[28px] p-[8px]">
-          <div className="relative rounded-[12px] lg:rounded-[24px]">
+        <div className="bg-white rounded-[16px] lg:rounded-[28px] p-[8px] ">
+          <div className="relative rounded-[12px] lg:rounded-[24px] ">
             <Badge discount={item.discount} />
-            <img src="/shoe.png" />
+            <img src="/shoe.png" className="w-full" />
           </div>
         </div>
 
@@ -28,7 +28,6 @@ const Card = ({ item }: Props) => {
         to={`/detail/${item.id}`}
         className="bg-dark text-white font-medium px-4 py-2 rounded-[8px] transition hover:bg-black "
       >
-        {" "}
         Ürünü Görüntüle -{" "}
         <span className={item.discount ? "text-orange-400" : "text-white"}>
           ${price}

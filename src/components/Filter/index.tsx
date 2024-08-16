@@ -1,13 +1,40 @@
+import { useSearchParams } from "react-router-dom";
 import Color from "./Color";
 import Gender from "./Gender";
 import Price from "./Price";
 import Size from "./Size";
+import { useState } from "react";
 
 type Props = {
   close: () => void;
   isOpen: boolean;
 };
 const Filter = ({ isOpen, close }: Props) => {
+  const [params, setParams] = useSearchParams();
+
+  //size,color,gender,price state lerini burda tuttuk ve onlara props olarak gönderdik. Burdan handleReset butonu ile sıfırlama yapabilelim diye
+  const [size, setSize] = useState<string[]>(
+    params.get("size")?.split(",") || []
+  );
+
+  const [color, setColor] = useState<string[]>(
+    params.get("color")?.split(",") || []
+  );
+
+  const [gender, setGender] = useState<string[]>(
+    params.get("gender")?.split(",") || []
+  );
+
+  const [value, setValue] = useState<string>(params.get("price") || "0");
+
+  const handleReset = () => {
+    setParams({});
+    setSize([]);
+    setColor([]);
+    setGender([]);
+    setValue("0");
+  };
+
   return (
     <div
       className={`${
@@ -25,14 +52,15 @@ const Filter = ({ isOpen, close }: Props) => {
         </h2>
 
         <form className="max-lg:p-5  bg-gray h-full flex flex-col gap-[24px] rounded-b-md">
-          <Size />
-          <Color />
-          <Gender />
-          <Price />
+          <Size selected={size} setSelected={setSize} />
+          <Color selected={color} setSelected={setColor} />
+          <Gender selected={gender} setSelected={setGender} />
+          <Price value={value} setValue={setValue} />
 
           <button
             className="border p-2 rounded-lg hover:bg-dark hover:text-white transition"
             type="reset"
+            onClick={handleReset}
           >
             Sıfırla
           </button>
