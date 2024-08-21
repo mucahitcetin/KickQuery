@@ -10,7 +10,7 @@ type Props = {
 const Card = ({ item }: Props) => {
   const price = calcDiscount(item.price, item.discount);
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between hover:-translate-y-2 transition-all cursor-pointer">
       <div>
         <div className="bg-white rounded-[16px] lg:rounded-[28px] p-[8px] ">
           <div className="relative rounded-[12px] lg:rounded-[24px] ">
