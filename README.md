@@ -2,6 +2,12 @@
 
 KickQuery, ayakkabıları listeleyen ve detaylı filtreleme seçenekleri sunan bir e-ticaret sitesidir. Figma'dan alınan tasarımla oluşturulan bu proje, React ve Vite kullanılarak geliştirilmiştir. Verileri yönetmek ve sorgulamak için React Tanstack Query kullanılmıştır, böylece kullanıcılar hızlı ve verimli bir deneyim yaşar.
 
+<h3>Figma Tasarımı</h3>
+
+(Bu link üzerinden Figma tasarımlarına ulaşabilirsiniz.)
+
+-https://www.figma.com/community/file/1214498651988846999/kicks-shoes-ecommerce-website-and-admin-mvp?searchSessionId=ly6ajf7x-vly8vll5xrr
+
 <h2>Teknolojiler ve Kütüphaneler</h2>
 
 <ul>
